@@ -1,7 +1,8 @@
-const SlackBot = require('slackbots')
+const githubUtil = require('josu/utils/github')
 
-const bot = new SlackBot({})
-
-bot.on('start', () => {
-
+githubUtil.getNotificationsForUser({
+  repository : 'pumpup',
+  userName   : 'duelist',
+}).then(response => {
+  console.log(response)
 })
