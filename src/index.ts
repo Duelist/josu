@@ -1,4 +1,10 @@
-const githubUtil = require('josu/utils/github')
+const CLIENT_EVENTS = require('@slack/client').CLIENT_EVENTS
+const RTM_EVENTS    = require('@slack/client').RTM_EVENTS
+
+const slackBotClient = require('josu/clients/slackbot')
+const githubUtil     = require('josu/utils/github')
+
+
 
 console.log('test: get notifications')
 githubUtil.getNotifications({
@@ -46,3 +52,26 @@ githubUtil.getPullRequests({
   )
 
 })
+
+
+
+slackBotClient.on(CLIENT_EVENTS.RTM.AUTHENTICATED, data => {
+  console.log('ibtest on start')
+  console.log('My id: ', data.self.id)
+  console.log('My name: ', data.self.name)
+})
+slackBotClient.on(RTM_EVENTS.MESSAGE, data => {
+  console.log('ibtest', data)
+  if (data.type === 'message' && data.subtype !== 'bot_message') {
+    slackBotClient.sendMessage(
+      [
+        'Hi ',
+        slackBotClient.dataStore.users[data.user].profile.first_name,
+        '!'
+      ].join(''),
+      data.channel,
+    )
+  }
+})
+
+slackBotClient.start()

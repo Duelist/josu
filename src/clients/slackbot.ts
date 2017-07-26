@@ -1,6 +1,9 @@
-const slackBot = require('slackbots')
+const RtmClient       = require('@slack/client').RtmClient
+const MemoryDataStore = require('@slack/client').MemoryDataStore;
 
-module.exports = new slackBot({
-  name  : 'Josu',
-  token : '',
-})
+
+
+module.exports = new RtmClient(
+  '',
+  { dataStore: new MemoryDataStore() }
+)
