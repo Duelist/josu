@@ -1,24 +1,71 @@
-const github = require('josu/singletons/github')
+const githubClient = require('josu/clients/github')
+const TIME         = require('josu/constants/time')
 
 
 
-async function getNotificationsForUser({
+/**
+ * Handle Github utility errors.
+ */
+function _handleError(error) {
+  console.error(error.message)
+}
+
+
+
+/**
+ * Get the pull requests for a user in a specific repository.
+ */
+async function getPullRequests({
+  owner,
   repository,
-  userName,
 }: {
+  owner      : string,
   repository : string,
-  userName   : string,
-}) {
+}): Promise<Object[]> {
 
-  return await github.activity.getNotificationsForUser({
-    owner : userName,
-    repo  : repository,
+  return await githubClient.pullRequests.getAll({
+    owner,
+    repo: repository,
   })
+    .catch(_handleError)
+
+}
+
+
+
+/**
+ * Get the notifications for a user in a specific repository.
+ */
+async function getNotifications({
+  owner,
+  participating = true,
+  repository,
+  since = new Date(Date.now() - TIME.DAY),
+}: {
+  owner          : string,
+  participating? : boolean,
+  repository     : string,
+  since?         : Date,
+}): Promise<Object[]> {
+
+  const args = {
+    owner,
+    participating,
+    repo: repository,
+  }
+
+  if (since) {
+    args['since'] = since.toISOString()
+  }
+
+  return await githubClient.activity.getNotificationsForUser(args)
+    .catch(_handleError)
 
 }
 
 
 
 module.exports = {
-  getNotificationsForUser,
+  getPullRequests,
+  getNotifications,
 }
