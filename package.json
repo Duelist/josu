@@ -11,7 +11,8 @@
     "clean-build-dir": "rm -rf dist",
     "create-links": "mkdir -p dist/node_modules && ln -s .. dist/node_modules/josu",
     "lint": "eslint src",
-    "start-local": "node dist/bot/index.js"
+    "start": "env NODE_ENV=production node dist/bot/index.js",
+    "start-local": "env DEBUG=* node dist/bot/index.js"
   },
   "dependencies": {
     "@slack/client": "^3.10.0",
