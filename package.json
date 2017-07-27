@@ -1,7 +1,7 @@
 {
   "name": "josu",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "main": "dist/bot/index.js",
   "repository": "https://github.com/duelist/josu",
   "author": "Ian Benedict <ianbenedict@gmail.com>",
   "license": "MIT",
@@ -11,7 +11,7 @@
     "clean-build-dir": "rm -rf dist",
     "create-links": "mkdir -p dist/node_modules && ln -s .. dist/node_modules/josu",
     "lint": "eslint src",
-    "start-local": "node dist/index.js"
+    "start-local": "node dist/bot/index.js"
   },
   "dependencies": {
     "@slack/client": "^3.10.0",
