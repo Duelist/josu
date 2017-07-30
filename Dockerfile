@@ -5,7 +5,6 @@ WORKDIR /usr/src/josu
 
 COPY    . /usr/src/josu
 RUN     npm install -g yarn
-RUN     yarn global add typescript
 RUN     yarn install
 RUN     yarn build
 

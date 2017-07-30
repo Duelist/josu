@@ -65,7 +65,7 @@ async function getNotifications({
 
 
 
-module.exports = {
+export {
   getPullRequests,
   getNotifications,
 }

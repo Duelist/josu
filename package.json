@@ -6,21 +6,26 @@
   "author": "Ian Benedict <ianbenedict@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "yarn clean-build-dir && yarn create-links && tsc",
-    "build-watch": "yarn clean-build-dir && yarn create-links && tsc -w",
+    "build": "yarn clean-build-dir && yarn create-links && ./node_modules/typescript/bin/tsc",
+    "build-watch": "yarn clean-build-dir && yarn create-links && ./node_modules/typescript/bin/tsc -w",
     "clean-build-dir": "rm -rf dist",
     "create-links": "mkdir -p dist/node_modules && ln -s .. dist/node_modules/josu",
     "lint": "eslint src",
     "start": "env NODE_ENV=production node dist/bot/index.js",
-    "start-local": "env DEBUG=* node dist/bot/index.js"
+    "start-local": "env DEBUG=* node dist/bot/index.js",
+    "test": "yarn lint"
   },
   "dependencies": {
     "@slack/client": "^3.10.0",
-    "github": "^9.2.0"
+    "eslint-plugin-typescript": "^0.3.0",
+    "github": "^9.2.0",
+    "lodash": "^4.17.4"
   },
   "devDependencies": {
     "@types/node": "^8.0.16",
     "eslint": "^4.3.0",
-    "jest": "^20.0.4"
+    "jest": "^20.0.4",
+    "typescript": "^2.4.2",
+    "typescript-eslint-parser": "^4.0.0"
   }
 }

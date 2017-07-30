@@ -1,7 +1,14 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
     "allowJs": true,
+    "baseUrl": "./",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "paths": {
+      "josu/*": [
+        "./src/*"
+      ]
+    },
     "target": "es2017"
   },
   "include": [
